@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighPass", "HighPass\HighPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassBand", "PassBand\PassBand.csproj", "{35CD2A98-DF5D-4D44-B604-6883B1884DF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPod", "SPod\SPod.csproj", "{A7258821-2955-456B-97A1-C92BB37EE6DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{35CD2A98-DF5D-4D44-B604-6883B1884DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35CD2A98-DF5D-4D44-B604-6883B1884DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35CD2A98-DF5D-4D44-B604-6883B1884DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7258821-2955-456B-97A1-C92BB37EE6DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7258821-2955-456B-97A1-C92BB37EE6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7258821-2955-456B-97A1-C92BB37EE6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7258821-2955-456B-97A1-C92BB37EE6DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
