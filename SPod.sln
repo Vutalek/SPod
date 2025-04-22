@@ -17,11 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LowPass", "LowPass\LowPass.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CycledLin", "CycledLin\CycledLin.csproj", "{ED6E060F-BAC2-4AD6-9780-589995BF797E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{FA34BEF8-ACC4-4F29-BA1A-4C8B70093A6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighPass", "HighPass\HighPass.csproj", "{72CBB9B7-4646-4D66-936D-A8CE1F5529A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighPass", "HighPass\HighPass.csproj", "{72CBB9B7-4646-4D66-936D-A8CE1F5529A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassBand", "PassBand\PassBand.csproj", "{35CD2A98-DF5D-4D44-B604-6883B1884DF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassBand", "PassBand\PassBand.csproj", "{35CD2A98-DF5D-4D44-B604-6883B1884DF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,10 +55,6 @@ Global
 		{ED6E060F-BAC2-4AD6-9780-589995BF797E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED6E060F-BAC2-4AD6-9780-589995BF797E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED6E060F-BAC2-4AD6-9780-589995BF797E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA34BEF8-ACC4-4F29-BA1A-4C8B70093A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA34BEF8-ACC4-4F29-BA1A-4C8B70093A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA34BEF8-ACC4-4F29-BA1A-4C8B70093A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA34BEF8-ACC4-4F29-BA1A-4C8B70093A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72CBB9B7-4646-4D66-936D-A8CE1F5529A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72CBB9B7-4646-4D66-936D-A8CE1F5529A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72CBB9B7-4646-4D66-936D-A8CE1F5529A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
