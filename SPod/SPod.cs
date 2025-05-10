@@ -2,8 +2,6 @@ using SPodLib.Wav;
 using SPodLib.Buffer;
 using SPodLib.Audio;
 using SPodLib.EffectImplementation;
-using SPodLib.Effect;
-using SPodLib.Parser;
 
 namespace SPod
 {
@@ -15,9 +13,7 @@ namespace SPod
         private FileStream? _file;
         private WavReader _wavReader;
 
-        private EffectProcessor _effectProcessor;
-        private FIRFilter _fir;
-        private IIRFilter _iir;
+        private EqualizerProcessor _equalizer;
 
         private AudioPlayer _player;
         private CancellationTokenSource? _playerTask;
@@ -28,23 +24,20 @@ namespace SPod
         {
             InitializeComponent();
 
-            _buffer1 = new RingBuffer(1000);
-            _buffer2 = new RingBuffer(1000);
+            _buffer1 = new RingBuffer(4000);
+            _buffer2 = new RingBuffer(4000);
             _wavReader = new WavReader(_buffer1);
 
-            _fir = FilterParser.ParseFIR("fir.fcf");
-
-            _iir = FilterParser.ParseIIR("iir.fcf", true);
-
-            ChainEffect filters = new ChainEffect();
-            filters.Add(_fir);
-            filters.Add(_iir);
-
-            _effectProcessor = new EffectProcessor(filters, _buffer1, _buffer2);
+            _equalizer = new EqualizerProcessor(6, _buffer1, _buffer2);
+            for (int i = 0; i < 6; i++)
+            {
+                _equalizer.AddBand(i, "filters/fir" + (i + 1) + ".fcf", FilterType.FIR);
+                _equalizer.AddBand(i, "filters/iir" + (i + 1) + ".fcf", FilterType.IIR, true);
+            }
 
             _player = new AudioPlayer(_buffer2);
 
-            _wavReader.Next += _effectProcessor.Process;
+            _wavReader.Next += _equalizer.Process;
             _player.OnRead += _wavReader.Read;
 
             _wavReader.OnEnd += End;
@@ -57,8 +50,7 @@ namespace SPod
             _playerTask?.Dispose();
             _player.Reset();
 
-            _fir.Reset();
-            _iir.Reset();
+            _equalizer.Reset();
 
             _file?.Dispose();
             _file?.Close();
@@ -75,7 +67,7 @@ namespace SPod
             _wavReader.SetSource(_file);
             _player.SetAudio(_wavReader.Meta);
 
-            _wavReader.Next += _effectProcessor.Process;
+            _wavReader.Next += _equalizer.Process;
             _player.OnRead += _wavReader.Read;
 
             _wavReader.OnEnd += End;
@@ -91,8 +83,7 @@ namespace SPod
         private void End()
         {
             _player.Stop();
-            _fir.Reset();
-            _iir.Reset();
+            _equalizer.Reset();
             _play = false;
             playButton.Invoke((MethodInvoker)delegate
             {
@@ -124,8 +115,7 @@ namespace SPod
             if (_player is not null)
             {
                 _player.Stop();
-                _fir.Reset();
-                _iir.Reset();
+                _equalizer.Reset();
                 _wavReader.Reset();
                 playButton.BackColor = Color.White;
                 playButton.Text = "Play";
@@ -138,8 +128,7 @@ namespace SPod
             if (_player is not null)
             {
                 _player.Restart();
-                _fir.Reset();
-                _iir.Reset();
+                _equalizer.Reset();
                 _wavReader.Reset();
                 playButton.BackColor = Color.LightGreen;
                 playButton.Text = "Pause";
@@ -155,32 +144,17 @@ namespace SPod
 
         private void FilterChanged(object sender, EventArgs e)
         {
-            if (Filter.Checked)
-            {
-                if (FIR.Checked)
-                {
-                    _iir.Disable();
-                    _fir.Reset();
-                    _fir.Enable();
-                }
-                else
-                {
-                    _fir.Disable();
-                    _iir.Reset();
-                    _iir.Enable();
-                }
-            }
+            if (FIR.Checked)
+                _equalizer.ChangeType(FilterType.FIR);
             else
-            {
-                _fir.Disable();
-                _iir.Disable();
-            }
+                _equalizer.ChangeType(FilterType.IIR);
         }
 
-        private void gain1Changed(object sender, EventArgs e)
+        private void gainChanged(object sender, EventArgs e)
         {
-            _fir.ChangeGain(gain1.Value);
-            _iir.ChangeGain(gain1.Value);
+            var gain = (TrackBar)sender;
+            int band = Convert.ToInt32(gain.Name[4]) - 48 - 1;
+            _equalizer.ChangeGain(band, gain.Value);
         }
     }
 }

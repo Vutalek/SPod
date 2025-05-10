@@ -21,7 +21,7 @@ namespace SPodLib.Parser
             return new FIRFilter(result);
         }
 
-        public static IIRFilter ParseIIR(string path, bool last_coef = false)
+        public static IIRFilter ParseIIR(string path, bool skip_last_coef = false)
         {
             StreamReader sr = new StreamReader(path);
             for (int i = 0; i < 8; i++)
@@ -42,7 +42,7 @@ namespace SPodLib.Parser
             for (int i = 0; i < length; i++)
                 scales[i] = Convert.ToDouble(sr.ReadLine()!.Trim(), CultureInfo.InvariantCulture);
             double coefGain = 1;
-            if (!last_coef)
+            if (!skip_last_coef)
                 coefGain = Convert.ToDouble(sr.ReadLine()!.Trim(), CultureInfo.InvariantCulture);
             List<Section> sections = new List<Section>(length);
             for (int i = 0; i < length; i++)

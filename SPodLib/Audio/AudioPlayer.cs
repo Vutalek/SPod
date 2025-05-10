@@ -55,8 +55,6 @@ namespace SPodLib.Audio
                     else
                     {
                         OnRead?.Invoke();
-                        bool a = _input.CanRead();
-                        int b = _channel.Available();
                         if (50000 - _channel.Available() >= _input.AtomSize && _input.CanRead())
                         {
                             Queue<Sample> samples = _input.Read();
