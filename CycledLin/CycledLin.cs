@@ -13,6 +13,8 @@ namespace CycledLin
 
         private AudioPlayer _player;
 
+        private CancellationTokenSource? _playerTask;
+
         private bool _play;
 
         public CycledLin()
@@ -41,7 +43,7 @@ namespace CycledLin
 
             _player.Play();
             _play = true;
-            _player.PlayTask().Start();
+            _playerTask = _player.PlayTask();
             playButton.BackColor = Color.LightGreen;
             playButton.Text = "Pause";
         }

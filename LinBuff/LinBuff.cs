@@ -12,6 +12,7 @@ namespace LinBuff
         private WavReader _wavReader;
 
         private AudioPlayer _player;
+        private CancellationTokenSource? _playerTask;
 
         private bool _play;
 
@@ -41,7 +42,8 @@ namespace LinBuff
 
             _player.Play();
             _play = true;
-            _player.PlayTask().Start();
+            _playerTask = _player.PlayTask();
+
             playButton.BackColor = Color.LightGreen;
             playButton.Text = "Pause";
         }
