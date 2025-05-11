@@ -17,7 +17,7 @@ namespace SPodLib.EffectImplementation
             Reset();
         }
 
-        public void ChangeLevel(float level)
+        public void ChangeLevel(double level)
         {
             _level = level;
         }

@@ -42,6 +42,25 @@ namespace SPodLib.EffectImplementation
             else return samples;
         }
 
+        public Sample ApplySingle(Sample sample)
+        {
+            if (IsEnabled())
+            {
+                double[] temp_double = [sample.Values()[0], sample.Values()[1]];
+                foreach (Section s in _sections)
+                    temp_double = s.Apply(temp_double);
+
+                temp_double[0] *= _coef_gain;
+                temp_double[0] *= Math.Pow(10.0, _gain / 20.0);
+                temp_double[1] *= _coef_gain;
+                temp_double[1] *= Math.Pow(10.0, _gain / 20.0);
+                Sample result = new Sample(Clip(temp_double[0]), Clip(temp_double[1]));
+
+                return result;
+            }
+            else return sample;
+        }
+
         public void Reset()
         {
             foreach (Section s in _sections)

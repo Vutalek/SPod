@@ -18,7 +18,10 @@ namespace SPodLib.FFT
 
         public List<Sample> ReadSamples()
         {
-            return _samples;
+            List<Sample> output = new List<Sample>(_size);
+            for (int i = 0; i < _size; i++)
+                output.Add(_samples[i]);
+            return output;
         }
 
         public override void Process()
@@ -29,8 +32,8 @@ namespace SPodLib.FFT
                 Sample input = _inStream.Read().Dequeue();
                 Queue<Sample> output = new Queue<Sample>(1);
 
-                _samples.RemoveAt(0);
                 _samples.Add(input);
+                _samples.RemoveAt(0);
 
                 output.Enqueue(input);
                 _outStream.Write(output);

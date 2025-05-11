@@ -1,6 +1,7 @@
 ﻿using SPodLib.AudioSample;
 using SPodLib.Buffer;
 using SPodLib.Parser;
+using System.Collections.Concurrent;
 
 namespace SPodLib.EffectImplementation
 {
@@ -91,24 +92,17 @@ namespace SPodLib.EffectImplementation
                 Sample input = _inStream.Read().Dequeue();
                 Queue<Sample> output = new Queue<Sample>(1);
 
-                Queue<Sample> toSum = new Queue<Sample>();
+                List<Sample> toSum = new List<Sample>(_bands);
                 for (int i = 0; i < _bands; i++)
                 {
-                    Queue<Sample> qin = new Queue<Sample>(1);
-                    qin.Enqueue(input);
-                    Queue<Sample> result = new Queue<Sample>(1);
-                    result = _firs[i].Apply(qin);
-                    result = _iirs[i].Apply(result);
-                    toSum.Enqueue(result.Dequeue());
+                    Sample result = _firs[i].ApplySingle(input);
+                    result = _iirs[i].ApplySingle(result);
+                    toSum.Add(result);
                 }
 
                 Sample res = new Sample();
                 for (int i = 0; i < _bands; i++)
-                {
-                    Sample temp = new Sample();
-                    temp = toSum.Dequeue();
-                    res = res + temp;
-                }
+                    res = res + toSum[i];
                 output.Enqueue(res);
                 _outStream.Write(output);
             }

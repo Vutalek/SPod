@@ -26,11 +26,11 @@ namespace SPodLib.AudioSample
 
         public void Add(double valueR, double valueL)
         {
-            _historyR.RemoveAt(0);
             _historyR.Add(valueR);
+            _historyR.RemoveAt(0);
 
-            _historyL.RemoveAt(0);
             _historyL.Add(valueL);
+            _historyL.RemoveAt(0);
         }
 
         public void Clear()

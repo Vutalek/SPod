@@ -5,6 +5,14 @@ namespace SPodLib.Buffer
     public class RingBuffer : SampleBuffer
     {
         List<Sample> _buffer;
+
+        public List<Sample> Buffer
+        {
+            get
+            {
+                return _buffer.ToList();
+            }
+        }
         int _size;
 
         public RingBuffer(int capacity)

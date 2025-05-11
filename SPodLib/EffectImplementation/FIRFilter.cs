@@ -47,6 +47,27 @@ namespace SPodLib.EffectImplementation
             else return samples;
         }
 
+        public Sample ApplySingle(Sample sample)
+        {
+            if (IsEnabled())
+            {
+                _uhistory.Add(sample.Values()[0], sample.Values()[1]);
+                double xR = _uhistory[0][0] * _coefs[0];
+                double xL = _uhistory[0][1] * _coefs[0];
+                for (int j = 1; j < _coefs.Length; j++)
+                {
+                    xR += _uhistory[j][0] * _coefs[j];
+                    xL += _uhistory[j][1] * _coefs[j];
+                }
+                xR *= Math.Pow(10.0, _gain / 20.0);
+                xL *= Math.Pow(10.0, _gain / 20.0);
+                Sample result = new Sample(Clip(xR), Clip(xL));
+
+                return result;
+            }
+            else return sample;
+        }
+
         public void Reset()
         {
             _uhistory.Clear();

@@ -39,7 +39,7 @@
 
             ComplexNumber[] exponents = new ComplexNumber[size];
             for (int i = 0; i < size; i++)
-                exponents[i] = new ComplexNumber(0, -2 * Math.PI * i / size);
+                exponents[i] = ComplexNumber.Exp(new ComplexNumber(0, -2 * Math.PI * i / size));
 
             ComplexNumber[] firstHalf = new ComplexNumber[size / 2];
             ComplexNumber[] secondHalf = new ComplexNumber[size / 2];
