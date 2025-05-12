@@ -37,6 +37,7 @@ namespace SPodLib.EffectImplementation
             _triag = new double[_size];
             _rect = new double[_size];
             GeneratePatterns();
+            _currentPosition = 0;
         }
 
         private void GeneratePatterns()

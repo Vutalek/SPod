@@ -34,6 +34,7 @@ namespace SPod
         private int _numBands = 6;
 
         private bool _play;
+        private bool _trackSet = false;
 
         public SPod()
         {
@@ -105,7 +106,7 @@ namespace SPod
                 else
                 {
                     _equalizer.ChangeType(FilterType.IIR);
-                    IIR.Checked = false;
+                    IIR.Checked = true;
                 }
 
                 _equalizer.ChangeGain(0, state.Gain1);
@@ -297,6 +298,7 @@ namespace SPod
 
             playButton.BackColor = Color.LightGreen;
             playButton.Text = "Pause";
+            _trackSet = true;
         }
 
         private void End()
@@ -313,6 +315,8 @@ namespace SPod
 
         private void PlayButton(object sender, EventArgs e)
         {
+            if (!_trackSet) return;
+
             if (_play)
             {
                 _player.Pause();

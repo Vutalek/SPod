@@ -485,6 +485,7 @@
             // 
             delayDepth.Location = new Point(12, 83);
             delayDepth.Maximum = 8192;
+            delayDepth.Minimum = 10;
             delayDepth.Name = "delayDepth";
             delayDepth.Size = new Size(312, 56);
             delayDepth.TabIndex = 40;
@@ -584,7 +585,8 @@
             // envelopSize
             // 
             envelopSize.Location = new Point(12, 83);
-            envelopSize.Maximum = 8192;
+            envelopSize.Maximum = 41000;
+            envelopSize.Minimum = 10;
             envelopSize.Name = "envelopSize";
             envelopSize.Size = new Size(312, 56);
             envelopSize.TabIndex = 40;
