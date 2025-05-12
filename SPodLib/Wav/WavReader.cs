@@ -3,9 +3,19 @@ using SPodLib.Buffer;
 
 namespace SPodLib.Wav
 {
+    /// <summary>
+    /// Represents stream for reading wav file.
+    /// </summary>
     public class WavReader
     {
+        /// <summary>
+        /// Event that triggers on ending of reading file.
+        /// </summary>
         public event Action? OnEnd;
+
+        /// <summary>
+        /// Next action after writing operation.
+        /// </summary>
         public event Action? Next;
 
         public WavInfo Meta;
@@ -20,6 +30,10 @@ namespace SPodLib.Wav
             _outStream = output;
         }
 
+        /// <summary>
+        /// Sets the source of wav file.
+        /// </summary>
+        /// <param name="source"></param>
         public void SetSource(Stream source)
         {
             _inStream = source;
@@ -40,6 +54,9 @@ namespace SPodLib.Wav
             Sample.SetResolution((Resolution)Meta.BitsPerSample);
         }
 
+        /// <summary>
+        /// Reads the portion of data from source.
+        /// </summary>
         public void Read()
         {
             if (_inStream is not null && _outStream.CanWrite())
@@ -65,6 +82,9 @@ namespace SPodLib.Wav
             Next?.Invoke();
         }
 
+        /// <summary>
+        /// Resets the reading position.
+        /// </summary>
         public void Reset()
         {
             if (_inStream is not null)

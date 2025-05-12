@@ -1,5 +1,8 @@
 ﻿namespace SPodLib.Wav
 {
+    /// <summary>
+    /// Wav metadata.
+    /// </summary>
     public record WavInfo
     {
         public short AudioFormat;

@@ -3,6 +3,9 @@ using SPodLib.Effect;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// FIR filter.
+    /// </summary>
     public class FIRFilter : Switchable, IEffect
     {
         private SampleMemory _uhistory;
@@ -16,6 +19,10 @@ namespace SPodLib.EffectImplementation
             _uhistory = new SampleMemory(coefs.Length);
         }
 
+        /// <summary>
+        /// Change attenuation in dB.
+        /// </summary>
+        /// <param name="gain"></param>
         public void ChangeGain(double gain)
         {
             _gain = gain;
@@ -47,6 +54,11 @@ namespace SPodLib.EffectImplementation
             else return samples;
         }
 
+        /// <summary>
+        /// Acceleration for RingBuffer.
+        /// </summary>
+        /// <param name="sample"></param>
+        /// <returns></returns>
         public Sample ApplySingle(Sample sample)
         {
             if (IsEnabled())
@@ -68,6 +80,9 @@ namespace SPodLib.EffectImplementation
             else return sample;
         }
 
+        /// <summary>
+        /// Clear filter history.
+        /// </summary>
         public void Reset()
         {
             _uhistory.Clear();

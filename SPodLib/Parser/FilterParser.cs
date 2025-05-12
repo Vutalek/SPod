@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace SPodLib.Parser
 {
+    /// <summary>
+    /// Parser class for parsing *.fcf coefficient files.
+    /// </summary>
     public static class FilterParser
     {
         public static FIRFilter ParseFIR(string path)

@@ -2,6 +2,10 @@
 
 namespace SPodLib.Buffer
 {
+    /// <summary>
+    /// Linear buffer. Contains two buffers: one for read and one for write.
+    /// AtomSize = Capacity / 2.
+    /// </summary>
     public class LinearBuffer : SampleBuffer
     {
         Queue<Sample>[] _buffers;

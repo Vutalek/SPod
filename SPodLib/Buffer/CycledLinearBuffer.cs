@@ -3,6 +3,10 @@ using System.Drawing;
 
 namespace SPodLib.Buffer
 {
+    /// <summary>
+    /// Cycled Linear buffer (two buffers cycled).
+    /// AtomSize = Capacity / 2.
+    /// </summary>
     public class CycledLinearBuffer : SampleBuffer
     {
         private Queue<Sample> _firstHalf;

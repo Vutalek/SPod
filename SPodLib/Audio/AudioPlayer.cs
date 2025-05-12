@@ -4,13 +4,22 @@ using SPodLib.Wav;
 
 namespace SPodLib.Audio
 {
+    /// <summary>
+    /// Class representing audio player.
+    /// </summary>
     public class AudioPlayer
     {
-        public Action? OnRead;
+        /// <summary>
+        /// Event that will be triggered on read. Must contain actions to prepare data in buffers.
+        /// </summary>
+        public event Action? OnRead;
 
         private WavInfo _meta;
 
         private AudioChannel? _channel;
+        /// <summary>
+        /// AudioChannel object.
+        /// </summary>
         public AudioChannel? Channel
         {
             get { return _channel; }
@@ -34,12 +43,26 @@ namespace SPodLib.Audio
             _channel = new AudioChannel(wav.NumChannels, wav.BitsPerSample, wav.SampleRate);
         }
 
+        ~AudioPlayer()
+        {
+            Reset();
+        }
+
+        /// <summary>
+        /// Sets the audio for playback.
+        /// </summary>
+        /// <param name="wav">WavInfo object describing input.</param>
         public void SetAudio(WavInfo wav)
         {
             _meta = wav;
             _channel = new AudioChannel(wav.NumChannels, wav.BitsPerSample, wav.SampleRate);
         }
 
+        /// <summary>
+        /// Main starting point of player.
+        /// Starts new Task in which it is reading and writing to channel in a loop.
+        /// </summary>
+        /// <returns>CancellationTokenSource for stopping Task.</returns>
         public CancellationTokenSource PlayTask()
         {
             CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
@@ -71,6 +94,12 @@ namespace SPodLib.Audio
             return cancelTokenSource;
         }
 
+        /// <summary>
+        /// Change volume.
+        /// </summary>
+        /// <param name="volume">
+        /// Volume of a channel. Must be between 0 and 1.
+        /// </param>
         public void SetVolume(double volume)
         {
             if (_channel is null) return;
@@ -78,6 +107,9 @@ namespace SPodLib.Audio
             _channel.SetVolume(volume);
         }
 
+        /// <summary>
+        /// Start playing.
+        /// </summary>
         public void Play()
         {
             if (_channel is null) return;
@@ -85,6 +117,10 @@ namespace SPodLib.Audio
             _playing = true;
             _channel.Play();
         }
+
+        /// <summary>
+        /// Stop playing (stop and resart).
+        /// </summary>
         public void Stop()
         {
             if (_channel is null) return;
@@ -95,6 +131,9 @@ namespace SPodLib.Audio
             _channel.Stop();
         }
 
+        /// <summary>
+        /// Pause player.
+        /// </summary>
         public void Pause()
         {
             if (_channel is null) return;
@@ -103,6 +142,9 @@ namespace SPodLib.Audio
             _channel.Pause();
         }
 
+        /// <summary>
+        /// Restart playing.
+        /// </summary>
         public void Restart()
         {
             if (_channel is null) return;
@@ -111,6 +153,9 @@ namespace SPodLib.Audio
             _channel.Restart();
         }
 
+        /// <summary>
+        /// Free resources.
+        /// </summary>
         public void Reset()
         {
             _channel?.Reset();

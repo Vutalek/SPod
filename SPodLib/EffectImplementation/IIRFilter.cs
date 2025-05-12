@@ -3,6 +3,9 @@ using SPodLib.Effect;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// IIR filter.
+    /// </summary>
     public class IIRFilter : Switchable, IEffect
     {
         private List<Section> _sections;
@@ -15,6 +18,10 @@ namespace SPodLib.EffectImplementation
             _coef_gain = coef_gain;
         }
 
+        /// <summary>
+        /// Change attenuation id dB.
+        /// </summary>
+        /// <param name="gain"></param>
         public void ChangeGain(double gain)
         {
             _gain = gain;
@@ -42,6 +49,11 @@ namespace SPodLib.EffectImplementation
             else return samples;
         }
 
+        /// <summary>
+        /// Method for acceleration with RingBuffer.
+        /// </summary>
+        /// <param name="sample"></param>
+        /// <returns></returns>
         public Sample ApplySingle(Sample sample)
         {
             if (IsEnabled())
@@ -61,6 +73,9 @@ namespace SPodLib.EffectImplementation
             else return sample;
         }
 
+        /// <summary>
+        /// Clear history of filter.
+        /// </summary>
         public void Reset()
         {
             foreach (Section s in _sections)

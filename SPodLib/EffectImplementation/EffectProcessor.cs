@@ -1,10 +1,12 @@
 ﻿using SPodLib.Buffer;
 using SPodLib.Effect;
-using SPodLib.Processor;
 using SPodLib.AudioSample;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// Processor for effects.
+    /// </summary>
     public class EffectProcessor : Processor.Processor
     {
         private IEffect _effect;

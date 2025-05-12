@@ -1,5 +1,8 @@
 ﻿namespace SPodLib.FFT
 {
+    /// <summary>
+    /// FFT algorithm.
+    /// </summary>
     public static class FFTAlgorithm
     {
         public static double[] FFT(double[] samples)

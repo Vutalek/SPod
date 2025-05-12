@@ -2,7 +2,10 @@
 
 namespace SPodLib.AudioSample
 {
-    class SampleMemory
+    /// <summary>
+    /// Class representing Sample sequence.
+    /// </summary>
+    public class SampleMemory
     {
         private int _size;
         private List<double> _historyR = new List<double>();
@@ -24,6 +27,11 @@ namespace SPodLib.AudioSample
             }
         }
 
+        /// <summary>
+        /// Add the sample by values.
+        /// </summary>
+        /// <param name="valueR"></param>
+        /// <param name="valueL"></param>
         public void Add(double valueR, double valueL)
         {
             _historyR.Add(valueR);
@@ -33,6 +41,9 @@ namespace SPodLib.AudioSample
             _historyL.RemoveAt(0);
         }
 
+        /// <summary>
+        /// Clears the sequence.
+        /// </summary>
         public void Clear()
         {
             for (int i = 0; i < _size; i++)

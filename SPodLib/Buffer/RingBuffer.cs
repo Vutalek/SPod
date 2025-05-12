@@ -2,6 +2,10 @@
 
 namespace SPodLib.Buffer
 {
+    /// <summary>
+    /// Ring Buffer.
+    /// AtomSize = 1.
+    /// </summary>
     public class RingBuffer : SampleBuffer
     {
         List<Sample> _buffer;

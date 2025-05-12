@@ -3,12 +3,20 @@ using SPodLib.Effect;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// Delay effect.
+    /// </summary>
     public class Delay : Switchable, IEffect
     {
         private int _depth;
         private Queue<Sample> _history;
         private double _level;
 
+        /// <summary>
+        /// Creates instance of delay effect.
+        /// </summary>
+        /// <param name="depth">Number of samples in delay memory.</param>
+        /// <param name="level">Attenuation of delayed samples. Must be between 0 and 1.</param>
         public Delay(int depth, double level) : base()
         {
             _depth = depth;
@@ -42,6 +50,9 @@ namespace SPodLib.EffectImplementation
             }
         }
 
+        /// <summary>
+        /// Clears delay memory.
+        /// </summary>
         public void Reset()
         {
             _history.Clear();

@@ -5,12 +5,18 @@ using System.Collections.Concurrent;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// Enumeration of filter types.
+    /// </summary>
     public enum FilterType
     {
         FIR,
         IIR
     }
 
+    /// <summary>
+    /// Processor for equalizer.
+    /// </summary>
     public class EqualizerProcessor : Processor.Processor
     {
         private int _bands;
@@ -28,6 +34,13 @@ namespace SPodLib.EffectImplementation
                 _iirs.Add(new IIRFilter(new List<Section>(){ }, 0.0));
         }
 
+        /// <summary>
+        /// Adds band to equalizer.
+        /// </summary>
+        /// <param name="band">index of band.</param>
+        /// <param name="path">path to *.fcf file with filter coefficients.</param>
+        /// <param name="type"></param>
+        /// <param name="skip_last_coef"></param>
         public void AddBand(int band, string path, FilterType type, bool skip_last_coef = false)
         {
             switch(type)
@@ -44,6 +57,10 @@ namespace SPodLib.EffectImplementation
             }
         }
 
+        /// <summary>
+        /// Switching between FIR and IIR.
+        /// </summary>
+        /// <param name="type"></param>
         public void ChangeType(FilterType type)
         {
             switch (type)
@@ -75,6 +92,9 @@ namespace SPodLib.EffectImplementation
             _iirs[band].ChangeGain(value);
         }
 
+        /// <summary>
+        /// Clear filters memory.
+        /// </summary>
         public void Reset()
         {
             foreach (FIRFilter fir in _firs) fir.Reset();

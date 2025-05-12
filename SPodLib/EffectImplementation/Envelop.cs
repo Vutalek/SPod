@@ -3,6 +3,9 @@ using SPodLib.Effect;
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// Envelop effect. Mixes three patterns: sin, triangular and rectangular.
+    /// </summary>
     public class Envelop : Switchable, IEffect
     {
         private int _size;
@@ -30,6 +33,10 @@ namespace SPodLib.EffectImplementation
             SetSize(size);
         }
 
+        /// <summary>
+        /// Size of pattern in samples.
+        /// </summary>
+        /// <param name="size"></param>
         public void SetSize(int size)
         {
             _size = size;

@@ -3,6 +3,9 @@ using System.Linq.Expressions;
 
 namespace SPodLib.FFT
 {
+    /// <summary>
+    /// Internal class for complex number operations.
+    /// </summary>
     internal class ComplexNumber
     {
         private double _a;

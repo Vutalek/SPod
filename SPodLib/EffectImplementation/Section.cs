@@ -2,6 +2,9 @@
 
 namespace SPodLib.EffectImplementation
 {
+    /// <summary>
+    /// Section of IIR filter.
+    /// </summary>
     public class Section
     {
         private SampleMemory _uhistory;
@@ -43,6 +46,9 @@ namespace SPodLib.EffectImplementation
             return [ xR, xL ];
         }
 
+        /// <summary>
+        /// Clears histories.
+        /// </summary>
         public void Reset()
         {
             _uhistory.Clear();

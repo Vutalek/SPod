@@ -1,5 +1,8 @@
 ﻿namespace SPodLib.AudioSample
 {
+    /// <summary>
+    /// Enumeration of resolutions.
+    /// </summary>
     public enum Resolution
     {
         Bit8 = 8,

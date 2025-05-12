@@ -1,5 +1,8 @@
 ﻿namespace SPodLib.AudioSample
 {
+    /// <summary>
+    /// Class representing samples. Wraps byte operations inside.
+    /// </summary>
     public class Sample
     {
         private static int _resolution = 16;
@@ -23,7 +26,10 @@
             return extended;
         }
 
-        // sample must be in little endian
+        /// <summary>
+        /// Creates new sample.
+        /// </summary>
+        /// <param name="sample">Sample must be in little endian byte order.</param>
         public Sample(byte[] sample)
         {
             if (_stereo)
@@ -45,6 +51,10 @@
             _sampleL = sampleL;
         }
 
+        /// <summary>
+        /// Sets global resolution for all samples.
+        /// </summary>
+        /// <param name="bits"></param>
         public static void SetResolution(Resolution bits)
         {
             _resolution = (int)bits;
@@ -52,16 +62,27 @@
             _minValue = -((int)Math.Pow(2, _resolution - 1) - 1);
         }
 
+        /// <summary>
+        /// Sets stereo mode.
+        /// </summary>
+        /// <param name="stereo">true if must me stereo.</param>
         public static void SetStereo(bool stereo)
         {
             _stereo = stereo;
         }
 
+        /// <summary>
+        /// Checks if Sample in stereo mode.
+        /// </summary>
+        /// <returns>true if stereo.</returns>
         public static bool IsStereo()
         {
             return _stereo;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>Gets the byte representation of sample.</returns>
         public byte[] Bytes()
         {
             int limitedR = Math.Max(Math.Min(_sampleR, _maxValue), _minValue);
@@ -81,6 +102,10 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>Gets the value representation of sample (first element is right channel,
+        /// second element is left channel).</returns>
         public int[] Values()
         {
             return [_sampleR, _sampleL];
