@@ -12,7 +12,15 @@ namespace UnitTests
             CycledLinearBuffer rb = new CycledLinearBuffer(3);
             //rb.Write(new List<Sample> { new Sample(10), new Sample(10), new Sample(10) });
             //rb.Write(new List<Sample> { new Sample(20), new Sample(20), new Sample(20) });
-            foreach(Sample sample in rb.Read())
+            Queue<Sample> samples = new Queue<Sample>();
+            for (int i = 0; i  < 3; i++)
+                samples.Enqueue(new Sample(10));
+            rb.Write(samples);
+
+            for (int i = 0; i < 3; i++)
+                samples.Enqueue(new Sample(20));
+            rb.Write(samples);
+            foreach (Sample sample in rb.Read())
                 Console.WriteLine(sample.Values()[0]);
             foreach (Sample sample in rb.Read())
                 Console.WriteLine(sample.Values()[0]);
