@@ -56,7 +56,7 @@ namespace SPod
             for (int i = 0; i < _numBands; i++)
             {
                 _equalizer.AddBand(i, "filters/fir" + (i + 1) + ".fcf", FilterType.FIR);
-                _equalizer.AddBand(i, "filters/iir" + (i + 1) + ".fcf", FilterType.IIR, true);
+                _equalizer.AddBand(i, "filters/iir" + (i + 1) + ".fcf", FilterType.IIR, true);  
             }
 
             _player = new AudioPlayer(_buffer3);

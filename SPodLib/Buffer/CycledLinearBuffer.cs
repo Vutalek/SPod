@@ -1,5 +1,4 @@
 ﻿using SPodLib.AudioSample;
-using System.Drawing;
 
 namespace SPodLib.Buffer
 {

@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq.Expressions;
-
-namespace SPodLib.FFT
+﻿namespace SPodLib.FFT
 {
     /// <summary>
     /// Internal class for complex number operations.

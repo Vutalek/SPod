@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace SPodLib.AudioSample
+﻿namespace SPodLib.AudioSample
 {
     /// <summary>
     /// Class representing Sample sequence.
